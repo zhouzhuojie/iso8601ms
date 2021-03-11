@@ -3,17 +3,9 @@
 Package iso8601 is a simple Go package for encoding `time.Time` in JSON in ISO 8601
 format with millisecond precision, with the converted UTC timezone.
 
-https://docs.jsonata.org/date-time
-
-
+Standard iso8601 with millisecond precision: [https://docs.jsonata.org/date-time](https://docs.jsonata.org/date-time)
 
 ```go
-import (
-	"time"
-
-	"github.com/zhouzhuojie/iso8601ms"
-)
-
 t := iso8601ms.Time(time.Now())
 jsonBytes, _ := json.Marshal(t)
 fmt.Println(string(jsonBytes))
