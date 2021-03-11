@@ -19,7 +19,7 @@ func TestNow(t *testing.T) {
 	})
 
 	t.Run("Local format length should be 31", func(t *testing.T) {
-		iso8601msTime := Time(time.Now().Local())
+		iso8601msTime := time.Date(1996, 12, 19, 16, 39, 57, 1*1e6, time.FixedZone("UTC-7", -7*60*60))
 		jsonBytes, err := json.Marshal(iso8601msTime)
 		if err != nil {
 			t.Errorf("error = %v, want nil", err)
