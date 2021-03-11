@@ -7,14 +7,27 @@ import (
 )
 
 func TestNow(t *testing.T) {
-	iso8601msTime := Time(time.Now())
-	jsonBytes, err := json.Marshal(iso8601msTime)
-	if err != nil {
-		t.Errorf("error = %v, want nil", err)
-	}
-	if len(jsonBytes) != len(iso8601msFormat)+2 {
-		t.Errorf("invalid json string length %v, want %v", len(jsonBytes), len(iso8601msFormat)+2)
-	}
+	t.Run("UTC format length should be 26", func(t *testing.T) {
+		iso8601msTime := Time(time.Now().UTC())
+		jsonBytes, err := json.Marshal(iso8601msTime)
+		if err != nil {
+			t.Errorf("error = %v, want nil", err)
+		}
+		if len(jsonBytes) != 26 {
+			t.Errorf("invalid json string length %v, want %v", len(jsonBytes), 26)
+		}
+	})
+
+	t.Run("Local format length should be 31", func(t *testing.T) {
+		iso8601msTime := Time(time.Now().Local())
+		jsonBytes, err := json.Marshal(iso8601msTime)
+		if err != nil {
+			t.Errorf("error = %v, want nil", err)
+		}
+		if len(jsonBytes) != 31 {
+			t.Errorf("invalid json string length %v, want %v", len(jsonBytes), 31)
+		}
+	})
 }
 
 func TestUnmarshal(t *testing.T) {
